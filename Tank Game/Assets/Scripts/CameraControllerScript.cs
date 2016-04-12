@@ -4,13 +4,14 @@ using System.Collections;
 public class CameraControllerScript : MonoBehaviour {
 	//Current issue. Causing janky movement. 
 	public GameObject playerObject;
+	public GameObject objectToFollowRotation;
 
 	public float cameraHeight = 2.0f;
 	public float cameraDistanceMaxOffset = 6.0f;
 	public float cameraDistanceMinOffset = 1.0f;
 
-	public float cameraMaxYRotation = 80.0f;
-	public float cameraMinYRotation = -20.0f;
+	public float cameraPositiveYRotation = 80.0f;
+	public float cameraNegativeYRotation = -20.0f;
 
 	public float verticalLookOffset = 2.0f;
 	public float cameraMoveSpeed = 10.0f;
@@ -41,7 +42,7 @@ public class CameraControllerScript : MonoBehaviour {
 			mouseXAxis += Input.GetAxis ("Mouse X");
 			mouseYAxis -= Input.GetAxis ("Mouse Y");
 
-			mouseYAxis = Mathf.Clamp(mouseYAxis%360, cameraMinYRotation, cameraMaxYRotation);
+			mouseYAxis = Mathf.Clamp(mouseYAxis%360, cameraNegativeYRotation, cameraPositiveYRotation);
 
 			Quaternion rotation = Quaternion.Euler(mouseYAxis, mouseXAxis, 0);
 
@@ -63,6 +64,7 @@ public class CameraControllerScript : MonoBehaviour {
 			positionToLookAt = playerTransform.position + new Vector3 (0.0f, verticalLookOffset, 0.0f);
 			Vector3 position = rotation * negDistance + positionToLookAt;
 
+			objectToFollowRotation.transform.rotation = rotation;
 			transform.rotation = rotation;
 			transform.position = position;
 		}
