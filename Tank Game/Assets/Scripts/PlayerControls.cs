@@ -51,8 +51,8 @@ public class PlayerControls : MonoBehaviour {
 			Debug.Log ("On the road");
 			moveSpeed = moveSpeed + 3f;
 		}
-		if (other.gameObject.tag == "Obstacle") {
-			moveSpeed = moveSpeed - 3f;
+		if (other.gameObject.tag == "Turret") {
+			//moveSpeed = moveSpeed - 2f;
 		}
 		if (other.gameObject.CompareTag ("Pick Up")) {
 			//collecting objects so they disappear after collected and add them to the score
