@@ -3,6 +3,10 @@ using System.Collections;
 
 public class PlayerControls : MonoBehaviour {
 
+	public GameObject tankShell;
+	public Transform tankShellSpawn;
+	public float shootSpeed = 1000.0f;
+
 	CharacterController cc;
 	float rotateSpeed = 60f;
 	float jumpSpeed = 10f;
@@ -10,6 +14,7 @@ public class PlayerControls : MonoBehaviour {
 	float yVel = 0;
 	float gravity = -0.5f;
 	int score = 0;
+
 
 	void Start () {
 		cc = gameObject.GetComponent<CharacterController> ();
@@ -40,9 +45,12 @@ public class PlayerControls : MonoBehaviour {
 		cc.Move (amountToMove);
 		transform.Rotate (amountToRotate);
 
-		//Update camera
-		Camera.main.transform.position = transform.position - transform.forward * 5 + Vector3.up * 4;
-		Camera.main.transform.LookAt (transform.position + Vector3.up * 2);
+		if (Input.GetMouseButtonDown (0)) {
+			GameObject tankShellClone = (GameObject)GameObject.Instantiate (tankShell, tankShellSpawn.position, tankShellSpawn.rotation );
+			tankShellClone.GetComponent<Rigidbody> ().AddForce (tankShellSpawn.forward * shootSpeed); 
+			//After 60 seconds, destroy arrow.
+			Destroy (tankShellClone, 60f);
+		}
 	}
 
 	void OnTriggerEnter(Collider other) {
