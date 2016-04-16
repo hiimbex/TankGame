@@ -45,8 +45,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\EnemyTurretScript.cs" />
      <Compile Include="Assets\Scripts\CameraControllerScript.cs" />
+     <Compile Include="Assets\Scripts\EnemyTurretScript.cs" />
      <Compile Include="Assets\Scripts\PlayerControls.cs" />
      <Compile Include="Assets\Scripts\TurretController.cs" />
  <Reference Include="UnityEngine.UI">
