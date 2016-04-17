@@ -18,6 +18,8 @@ public class PlayerControls : MonoBehaviour {
 
 	void Start () {
 		cc = gameObject.GetComponent<CharacterController> ();
+		GameManagerScript.player = this.gameObject; 
+
 	}
 		
 	void Update () {
