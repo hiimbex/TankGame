@@ -3,16 +3,24 @@ using System.Collections;
 
 public class EnemyTurretScript : MonoBehaviour {
 
-	GameObject player;
 	public GameObject projectile;
-	public Transform projectileSpawn;
-	public float shootSpeed = 1000.0f;
+
+	GameObject player;
+	Transform projectileSpawn;
+	Transform turret;
+	float shootSpeed = 5000.0f;
+	float timeToShoot;
 
 	public bool aimAtPlayer = false;
 
 	// Use this for initialization
 	void Start () {
 		GameManagerScript.enemyTurretScriptList.Add (this); 
+		//Adding this to make sure it works. Will see later if removing the keyword
+		//this will do anything.
+		turret = this.transform.Find ("Turret Appearance/Turret");
+		projectileSpawn = this.transform.Find ("Turret Appearance/Turret/ProjectileSpawn");
+		timeToShoot = Time.deltaTime;
 	}
 	
 	// Update is called once per frame
@@ -25,14 +33,18 @@ public class EnemyTurretScript : MonoBehaviour {
 		}
 		if (aimAtPlayer) {
 			Vector3 relativePos = player.transform.position - transform.localPosition;
+			turret.LookAt (player.transform);
 			Debug.DrawRay (transform.position, relativePos*100f);
-			transform.LookAt (player.transform.position);
-			//transform.rotation = Quaternion.LookRotation (relativePos, Vector3.up);
-//			Debug.Log ("Hello");
-//			GameObject tankShellClone = (GameObject)GameObject.Instantiate (projectile, projectileSpawn.position, projectileSpawn.rotation );
-//			tankShellClone.GetComponent<Rigidbody> ().AddForce (projectileSpawn.forward * shootSpeed); 
-//			//After 60 seconds, destroy arrow.
-//			Destroy (tankShellClone, 60f);
+
+			if (timeToShoot > 1f) {
+				GameObject projectileClone = (GameObject)GameObject.Instantiate (projectile, projectileSpawn.position, projectileSpawn.rotation);
+				projectileClone.GetComponent<Rigidbody> ().AddForce (projectileSpawn.forward * shootSpeed);
+				//After 60 seconds, destroy arrow.
+				Destroy (projectileClone, 60f);
+				timeToShoot = 0;
+			}
+
+			timeToShoot += Time.deltaTime;
 		}
 	}
 }
