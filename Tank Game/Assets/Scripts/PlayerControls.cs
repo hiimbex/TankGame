@@ -55,21 +55,21 @@ public class PlayerControls : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter(Collider other) {
+	void OnControllerColliderHit(ControllerColliderHit other) {
 		//not currently in use but from old code in case it gets implemented
 		if (other.gameObject.tag == "Road") {
 			Debug.Log ("On the road");
 			moveSpeed = moveSpeed + 3f;
-		}
-		if (other.gameObject.tag == "Turret") {
+		} else if (other.gameObject.tag == "Turret") {
 			//moveSpeed = moveSpeed - 2f;
+//		} else if (other.gameObject.CompareTag ("Pick Up")) {
+//			//collecting objects so they disappear after collected and add them to the score
+//			other.gameObject.SetActive (false);
+//			moveSpeed = moveSpeed + 3f;
+//			score++;
+		} else if (other.gameObject.CompareTag ("Shell")) {
+			//Debug.Log ("Player has been hit!");
 		}
-		if (other.gameObject.CompareTag ("Pick Up")) {
-			//collecting objects so they disappear after collected and add them to the score
-			other.gameObject.SetActive (false);
-			moveSpeed = moveSpeed + 3f;
-			score++;
-		} 
 	}
 	void OnTriggerExit(Collider other) {
 		if (other.gameObject.tag == "Road") {

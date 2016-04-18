@@ -8,7 +8,7 @@ public class EnemyTurretScript : MonoBehaviour {
 	GameObject player;
 	Transform projectileSpawn;
 	Transform turret;
-	float shootSpeed = 5000.0f;
+	float shootSpeed = 2000.0f;
 	float timeToShoot;
 
 	public bool aimAtPlayer = false;
@@ -16,6 +16,7 @@ public class EnemyTurretScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		GameManagerScript.enemyTurretScriptList.Add (this); 
+		GameManagerScript.enemyCount += 1;
 		//Adding this to make sure it works. Will see later if removing the keyword
 		//this will do anything.
 		turret = this.transform.Find ("Turret Appearance/Turret");
@@ -45,6 +46,15 @@ public class EnemyTurretScript : MonoBehaviour {
 			}
 
 			timeToShoot += Time.deltaTime;
+		}
+	}
+
+	void OnTriggerEnter (Collider other) {
+		Debug.Log (this.gameObject.name);
+		if (other.gameObject.CompareTag ("Shell")) {
+			GameManagerScript.ReduceEnemyCount (this);
+			Destroy (gameObject);
+			Destroy (other.gameObject);
 		}
 	}
 }
