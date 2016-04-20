@@ -9,7 +9,6 @@ public class PlayerControls : MonoBehaviour {
 
 	CharacterController cc;
 	float rotateSpeed = 60f;
-	float jumpSpeed = 10f;
 	float moveSpeed = 3f;
 	float yVel = 0;
 	float gravity = -0.5f;
@@ -79,7 +78,7 @@ public class PlayerControls : MonoBehaviour {
 	}
 	void OnGUI() {
 		//displays the score
-		GUI.Label (new Rect(20, 20, 200, 200), "POWERUPS: " + score);
-		GUI.Label (new Rect(40, 40, 400, 400), "SPEED: " + moveSpeed + "0mph");
+		//sGUI.Label (new Rect(20, 20, 200, 200), "POWERUPS: " + score);
+		GUI.Label (new Rect(20, 20, 400, 400), "Speed: " + moveSpeed + "0mph");
 	}
 }

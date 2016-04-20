@@ -8,8 +8,9 @@ public class EnemyTurretScript : MonoBehaviour {
 	GameObject player;
 	Transform projectileSpawn;
 	Transform turret;
-	float shootSpeed = 2000.0f;
+	float shootSpeed = 3000.0f;
 	float timeToShoot;
+	float randShootNum;
 
 	public bool aimAtPlayer = false;
 
@@ -21,7 +22,7 @@ public class EnemyTurretScript : MonoBehaviour {
 		//this will do anything.
 		turret = this.transform.Find ("Turret Appearance/Turret");
 		projectileSpawn = this.transform.Find ("Turret Appearance/Turret/ProjectileSpawn");
-		timeToShoot = Time.deltaTime;
+		//timeToShoot = Time.deltaTime;
 	}
 	
 	// Update is called once per frame
@@ -29,25 +30,32 @@ public class EnemyTurretScript : MonoBehaviour {
 		if (player == null) {
 			player = GameManagerScript.player;
 		}
-		if (Vector3.Distance (transform.position, player.transform.position) < 50f) {
+		if (Vector3.Distance (transform.position, player.transform.position) > 10f) {
+			aimAtPlayer = false;
+		}
+		if (Vector3.Distance (transform.position, player.transform.position) < 10f) {
 			aimAtPlayer = true;
 		}
-		if (aimAtPlayer) {
+			
 			Vector3 relativePos = player.transform.position - transform.localPosition;
 			turret.LookAt (player.transform);
-			Debug.DrawRay (transform.position, relativePos*100f);
+			Debug.DrawRay (transform.position, relativePos * 100f);
 
-			if (timeToShoot > 1f) {
-				GameObject projectileClone = (GameObject)GameObject.Instantiate (projectile, projectileSpawn.position, projectileSpawn.rotation);
-				projectileClone.GetComponent<Rigidbody> ().AddForce (projectileSpawn.forward * shootSpeed);
-				//After 60 seconds, destroy arrow.
-				Destroy (projectileClone, 60f);
-				timeToShoot = 0;
-			}
+		randShootNum = (Random.Range(2.5F, 11.0F));
 
+		if (timeToShoot > randShootNum) {
+			GameObject projectileClone = (GameObject)GameObject.Instantiate (projectile, projectileSpawn.position, projectileSpawn.rotation);
+			projectileClone.GetComponent<Rigidbody> ().AddForce (projectileSpawn.forward * shootSpeed);
+			//After 60 seconds, destroy arrow.
+			Destroy (projectileClone, 60f);
+			timeToShoot = 0;
+		}
+		//if (Vector3.Distance (transform.position, player.transform.position) < 2f) {
+		//	projectile.GetComponent<Rigidbody> ().AddForce (projectileSpawn.forward * -shootSpeed);
+		//}
 			timeToShoot += Time.deltaTime;
 		}
-	}
+
 
 	void OnTriggerEnter (Collider other) {
 		Debug.Log (this.gameObject.name);

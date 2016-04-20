@@ -39,8 +39,8 @@ public class CameraControllerScript : MonoBehaviour {
 	void LateUpdate () {
 		//Checks to make sure that there is a transform.
 		if (playerTransform) {
-			mouseXAxis += Input.GetAxis ("Mouse X");
-			mouseYAxis -= Input.GetAxis ("Mouse Y");
+			mouseXAxis += Input.GetAxis ("Mouse X") * 20;
+			mouseYAxis -= Input.GetAxis ("Mouse Y") * 20;
 
 			mouseYAxis = Mathf.Clamp(mouseYAxis%360, cameraNegativeYRotation, cameraPositiveYRotation);
 
