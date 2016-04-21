@@ -13,6 +13,7 @@ public class PlayerControls : MonoBehaviour {
 	float yVel = 0;
 	float gravity = -0.5f;
 	int score = 0;
+	public static int ammo = 10;
 
 
 	void Start () {
@@ -46,20 +47,25 @@ public class PlayerControls : MonoBehaviour {
 		cc.Move (amountToMove);
 		transform.Rotate (amountToRotate);
 
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetMouseButtonDown (0) && ammo > 0) {
 			GameObject tankShellClone = (GameObject)GameObject.Instantiate (tankShell, tankShellSpawn.position, tankShellSpawn.rotation );
 			tankShellClone.GetComponent<Rigidbody> ().AddForce (tankShellSpawn.forward * shootSpeed); 
 			//After 60 seconds, destroy arrow.
 			Destroy (tankShellClone, 60f);
+			ammo-=1;
 		}
 	}
 
-	void OnControllerColliderHit(ControllerColliderHit other) {
+	void OnTriggerEnter(Collider other) {
 		//not currently in use but from old code in case it gets implemented
 		if (other.gameObject.tag == "Road") {
 			Debug.Log ("On the road");
 			moveSpeed = moveSpeed + 3f;
-		} else if (other.gameObject.tag == "Turret") {
+		} 
+		if (other.gameObject.tag == "Ammo") {
+			other.gameObject.SetActive (false);
+			ammo = ammo + 10;
+			Debug.Log ("GOT AMMO!");
 			//moveSpeed = moveSpeed - 2f;
 //		} else if (other.gameObject.CompareTag ("Pick Up")) {
 //			//collecting objects so they disappear after collected and add them to the score
@@ -80,5 +86,6 @@ public class PlayerControls : MonoBehaviour {
 		//displays the score
 		//sGUI.Label (new Rect(20, 20, 200, 200), "POWERUPS: " + score);
 		GUI.Label (new Rect(20, 20, 400, 400), "Speed: " + moveSpeed + "0mph");
+		GUI.Label (new Rect(20, 60, 400, 400), "Ammo: " + ammo);
 	}
 }
