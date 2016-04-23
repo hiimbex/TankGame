@@ -2,8 +2,8 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameManagerScript.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameManagerScript.cs" Line="17" Column="3" />
-      <File FileName="Assets/Scripts/PlayerControls.cs" Line="66" Column="4" />
+      <File FileName="Assets/Scripts/GameManagerScript.cs" Line="18" Column="5" />
+      <File FileName="Assets/Scripts/PlayerControls.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/CameraControllerScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/EnemyTurretScript.cs" Line="1" Column="1" />
     </Files>
