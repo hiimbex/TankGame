@@ -1,11 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameManagerScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameManagerScript.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameManagerScript.cs" Line="17" Column="3" />
-      <File FileName="Assets/Scripts/PlayerControls.cs" Line="66" Column="4" />
-      <File FileName="Assets/Scripts/CameraControllerScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/EnemyTurretScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GameManagerScript.cs" Line="18" Column="1" />
+      <File FileName="Assets\Scripts\PlayerControls.cs" Line="66" Column="4" />
+      <File FileName="Assets\Scripts\CameraControllerScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\EnemyTurretScript.cs" Line="1" Column="1" />
+      <File FileName="..\..\..\..\Desktop\Unity stuff\Sandhu-midterm\Assets\Scripts\GameControllerScript.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
