@@ -15,10 +15,7 @@ public class GameManagerScript : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
-<<<<<<< HEAD
 		//turretsDestroyed = gameObject.GetComponent<Text>();
-=======
->>>>>>> 38dcc8bbce42f43b2c57d21d89fedf5761daefd2
 		//Cursor.visible = false;
 		//Cursor.lockState = CursorLockMode.Locked;
 	}
