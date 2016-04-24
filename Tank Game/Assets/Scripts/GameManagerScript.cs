@@ -11,11 +11,14 @@ public class GameManagerScript : MonoBehaviour {
 	//This works for now but it would be better to just get the length of the enemyTurretScriptList.
 	public static int enemyCount;
 	public static int scoreCountEnemy;
-	//public Text turretsDestroyed;
+	public Text turretsDestroyed;
 	// Use this for initialization
 
 	void Start () {
+<<<<<<< HEAD
 		//turretsDestroyed = gameObject.GetComponent<Text>();
+=======
+>>>>>>> 38dcc8bbce42f43b2c57d21d89fedf5761daefd2
 		//Cursor.visible = false;
 		//Cursor.lockState = CursorLockMode.Locked;
 	}
@@ -23,7 +26,7 @@ public class GameManagerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//scoreCountEnemy = scoreCountEnemy.ToString ();
-		//turretsDestroyed.text = "Turrets Destroyed: " + scoreCountEnemy;
+		turretsDestroyed.text = "Turrets Destroyed: " + scoreCountEnemy;
 	}
 
 	public static void ReduceEnemyCount (EnemyTurretScript turret) {
@@ -31,7 +34,6 @@ public class GameManagerScript : MonoBehaviour {
 		scoreCountEnemy++;
 		enemyCount -= 1;
 		Debug.Log (enemyCount);
-		//turretsDestroyed.text = "Turrets Destroyed: " + scoreCountEnemy;
 	}
 
 	void OnGUI() {
