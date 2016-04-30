@@ -29,6 +29,9 @@ public class GameManagerScript : MonoBehaviour {
 		if (player.GetComponent<PlayerControls> ().health <= 0) {
 			GameLost ();
 		}
+		if (enemyCount == 5){
+			GameWon ();
+		}
 	}
 
 	public static void ReduceEnemyCount (EnemyTurretScript turret) {
@@ -36,12 +39,16 @@ public class GameManagerScript : MonoBehaviour {
 		scoreCountEnemy++;
 		enemyCount -= 1;
 		Debug.Log (enemyCount);
+	
 	}
 
 	void GameLost () {
 		SceneManager.LoadScene ("GameLostScene");	
 	}
 
+	void GameWon () {
+		SceneManager.LoadScene ("GameWonScene");	
+	}
 
 }
 

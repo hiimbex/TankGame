@@ -30,10 +30,10 @@ public class EnemyTurretScript : MonoBehaviour {
 		if (player == null) {
 			player = GameManagerScript.player;
 		}
-		if (Vector3.Distance (transform.position, player.transform.position) > 22f) {
+		if (Vector3.Distance (transform.position, player.transform.position) > 45f) {
 			aimAtPlayer = false;
 		}
-		if (Vector3.Distance (transform.position, player.transform.position) < 22f) {
+		if (Vector3.Distance (transform.position, player.transform.position) < 45f) {
 			aimAtPlayer = true;
 		}
 			
@@ -41,7 +41,7 @@ public class EnemyTurretScript : MonoBehaviour {
 			turret.LookAt (player.transform);
 			Debug.DrawRay (transform.position, relativePos * 100f);
 
-		randShootNum = (Random.Range(2.5F, 11.0F));
+		randShootNum = (Random.Range(2.5F, 8.0F));
 		if(aimAtPlayer){
 		if (timeToShoot > randShootNum) {
 			GameObject projectileClone = (GameObject)GameObject.Instantiate (projectile, projectileSpawn.position, projectileSpawn.rotation);
