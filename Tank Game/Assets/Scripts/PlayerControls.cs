@@ -13,10 +13,9 @@ public class PlayerControls : MonoBehaviour {
 	float moveSpeed = 3f;
 	float yVel = 0;
 	float gravity = -0.5f;
-	//	int score = 0;
 	public static int ammo = 10;
 	public Text ammoLeft;
-
+	public int health = 10;
 
 	void Start () {
 		cc = gameObject.GetComponent<CharacterController> ();
@@ -80,7 +79,8 @@ public class PlayerControls : MonoBehaviour {
 			//			moveSpeed = moveSpeed + 3f;
 			//			score++;
 		} else if (other.gameObject.CompareTag ("Shell")) {
-			//Debug.Log ("Player has been hit!");
+			health -= 1;
+			Debug.Log (health);
 		}
 	}
 	void OnTriggerExit(Collider other) {
