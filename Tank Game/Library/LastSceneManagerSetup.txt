@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_Scenes/Main Tank Level.unity
+- path: Assets/_Scenes/GameWonScene.unity
   isLoaded: 1
   isActive: 1
