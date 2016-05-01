@@ -17,11 +17,13 @@ public class PlayerControls : MonoBehaviour {
 	public Text ammoLeft;
 	public int health = 10;
 	public bool flashonoff = false;
+	public Color originalAmmoTextColor;
 
 
 	void Start () {
 		cc = gameObject.GetComponent<CharacterController> ();
 		GameManagerScript.player = this.gameObject; 
+		originalAmmoTextColor = ammoLeft.color;
 	}
 
 	void Update () {
@@ -54,13 +56,16 @@ public class PlayerControls : MonoBehaviour {
 		if (ammo == 0) {
 			ammoLeft.color = Color.red;
 			flashonoff = true;
-			ammoLeft.color = new Color(ammoLeft.color.r, ammoLeft.color.g, ammoLeft.color.b, Mathf.PingPong(Time.time, 1));
+			ammoLeft.color = new Color (ammoLeft.color.r, ammoLeft.color.g, ammoLeft.color.b, Mathf.PingPong (Time.time, 1));
+		} else if (flashonoff && ammo > 0) {
+			flashonoff = false;
+			ammoLeft.color = originalAmmoTextColor;
 		}
 
 		if (Input.GetMouseButtonDown (0) && ammo > 0) {
 			GameObject tankShellClone = (GameObject)GameObject.Instantiate (tankShell, tankShellSpawn.position, tankShellSpawn.rotation );
 			tankShellClone.GetComponent<Rigidbody> ().AddForce (tankShellSpawn.forward * shootSpeed); 
-			//After 60 seconds, destroy arrow.
+			//After 60 seconds, destroy tank Shell.
 			Destroy (tankShellClone, 60f);
 			ammo-=1;
 		}
