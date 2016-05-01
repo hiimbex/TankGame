@@ -16,6 +16,8 @@ public class PlayerControls : MonoBehaviour {
 	public static int ammo = 10;
 	public Text ammoLeft;
 	public int health = 10;
+	public bool flashonoff = false;
+
 
 	void Start () {
 		cc = gameObject.GetComponent<CharacterController> ();
@@ -48,6 +50,14 @@ public class PlayerControls : MonoBehaviour {
 		transform.Rotate (amountToRotate);
 
 		ammoLeft.text = "Ammo: " + ammo; //updates the ammo through the ui
+
+		if (ammo == 0) {
+			ammoLeft.color = Color.red;
+			flashonoff = true;
+			ammoLeft.color = new Color(ammoLeft.color.r, ammoLeft.color.g, ammoLeft.color.b, Mathf.PingPong(Time.time, 1));
+			//FlashText ();
+			//ammoLeft.color.a = Mathf.Round(Mathf.PingPong(Time.time * 2.0, 1.0));
+		}
 
 		if (Input.GetMouseButtonDown (0) && ammo > 0) {
 			GameObject tankShellClone = (GameObject)GameObject.Instantiate (tankShell, tankShellSpawn.position, tankShellSpawn.rotation );
@@ -89,6 +99,18 @@ public class PlayerControls : MonoBehaviour {
 			moveSpeed = moveSpeed - 3f;
 		}
 	}
+//	public IEnumerator FlashText(){
+//		while (flashonoff) {
+//			Debug.Log ("flash text function being entered");
+//			//set the Text's text to blank
+//			ammoLeft.text = "";
+//			//display blank text for 0.5 seconds
+//			yield return new WaitForSeconds (.5f);
+//			//display “I AM FLASHING TEXT” for the next 0.5 seconds
+//			ammoLeft.text = "NO AMMO!";
+//			yield return new WaitForSeconds (.5f);
+//		}
+//	}
 
 	//	void OnGUI() {
 	//		//displays the score
