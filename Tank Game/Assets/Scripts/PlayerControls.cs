@@ -55,8 +55,6 @@ public class PlayerControls : MonoBehaviour {
 			ammoLeft.color = Color.red;
 			flashonoff = true;
 			ammoLeft.color = new Color(ammoLeft.color.r, ammoLeft.color.g, ammoLeft.color.b, Mathf.PingPong(Time.time, 1));
-			//FlashText ();
-			//ammoLeft.color.a = Mathf.Round(Mathf.PingPong(Time.time * 2.0, 1.0));
 		}
 
 		if (Input.GetMouseButtonDown (0) && ammo > 0) {
@@ -81,13 +79,6 @@ public class PlayerControls : MonoBehaviour {
 			Debug.Log ("GOT AMMO!"); 
 
 
-
-			//moveSpeed = moveSpeed - 2f;
-			//		} else if (other.gameObject.CompareTag ("Pick Up")) {
-			//			//collecting objects so they disappear after collected and add them to the score
-			//			other.gameObject.SetActive (false);
-			//			moveSpeed = moveSpeed + 3f;
-			//			score++;
 		} else if (other.gameObject.CompareTag ("Shell")) {
 			health -= 1;
 			Debug.Log (health);
@@ -99,23 +90,5 @@ public class PlayerControls : MonoBehaviour {
 			moveSpeed = moveSpeed - 3f;
 		}
 	}
-//	public IEnumerator FlashText(){
-//		while (flashonoff) {
-//			Debug.Log ("flash text function being entered");
-//			//set the Text's text to blank
-//			ammoLeft.text = "";
-//			//display blank text for 0.5 seconds
-//			yield return new WaitForSeconds (.5f);
-//			//display “I AM FLASHING TEXT” for the next 0.5 seconds
-//			ammoLeft.text = "NO AMMO!";
-//			yield return new WaitForSeconds (.5f);
-//		}
-//	}
 
-	//	void OnGUI() {
-	//		//displays the score
-	//		//sGUI.Label (new Rect(20, 20, 200, 200), "POWERUPS: " + score);
-	//		GUI.Label (new Rect(20, 20, 400, 400), "Speed: " + moveSpeed + "0mph");
-	//		GUI.Label (new Rect(20, 60, 400, 400), "Ammo: " + ammo);
-	//	}
 }
