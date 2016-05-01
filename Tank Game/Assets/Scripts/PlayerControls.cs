@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerControls : MonoBehaviour {
 
@@ -88,12 +89,19 @@ public class PlayerControls : MonoBehaviour {
 			health -= 1;
 			Debug.Log (health);
 		}
+		if (other.name == "OutOfBoundsTrigger") {
+			GameLost ();
+		}
 	}
 	void OnTriggerExit(Collider other) {
 		if (other.gameObject.tag == "Road") {
 			Debug.Log ("On the road");
 			moveSpeed = moveSpeed - 3f;
 		}
+	}
+
+	void GameLost () {
+		SceneManager.LoadScene ("GameLostScene");	
 	}
 
 }
