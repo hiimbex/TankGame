@@ -5,31 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class PlayerControls : MonoBehaviour {
 
-	public GameObject tankShell;
-	public Transform tankShellSpawn;
-	public float shootSpeed = 1000.0f;
-
 	CharacterController cc;
 	float rotateSpeed = 60f;
 	float moveSpeed = 3f;
 	float yVel = 0;
 	float gravity = -0.5f;
-	public static int ammo = 10;
 	public Text ammoLeft;
-	public int health = 10;
-	public bool flashonoff = false;
 	public Color originalAmmoTextColor;
-
+	public GameObject tankShell;
+	public Transform tankShellSpawn;
+	public float shootSpeed = 1000.0f;
+	public bool flashonoff = false;
+	public int health = 10;
+	public static int ammo = 10;
 
 	void Start () {
 		cc = gameObject.GetComponent<CharacterController> ();
 		GameManagerScript.player = this.gameObject; 
 		originalAmmoTextColor = ammoLeft.color;
+		//gets character controller from tank and sends that to game manager script and gets original text color for ammo text
 	}
 
 	void Update () {
 
-		//generic move code from mike
 		float hAxis = Input.GetAxis ("Horizontal");
 		float vAxis = Input.GetAxis ("Vertical");
 
@@ -53,7 +51,7 @@ public class PlayerControls : MonoBehaviour {
 		transform.Rotate (amountToRotate);
 
 		ammoLeft.text = "Ammo: " + ammo; 
-		//updates the ammo through the ui
+		//updates the ammo to display how much the player has left
 
 		if (ammo == 0) {
 			ammoLeft.color = Color.red;
@@ -83,11 +81,13 @@ public class PlayerControls : MonoBehaviour {
 			Debug.Log ("GOT AMMO!"); 
 		} 
 		//if ammo cache is picked up, set it's active to false and add 10 ammo 
+
 		else if (other.gameObject.CompareTag ("Shell")) {
 			health -= 1;
 			Debug.Log (health);
 		}
 		//if player (read: tank) is hit with a shell subtract one health
+
 		if (other.name == "OutOfBoundsTrigger") {
 			GameLost ();
 		}
