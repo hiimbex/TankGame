@@ -4,20 +4,11 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class testscript : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		Debug.Log ("testing for scene change start");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
+	//Used for button callback.
+	//Once clicked, will return player back to the tank level.
 	public void ClickTest () {
-		Debug.Log ("testing for scene change function");
 		SceneManager.LoadScene ("Main Tank Level");	
-	
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 }

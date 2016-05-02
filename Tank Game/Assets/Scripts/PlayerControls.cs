@@ -20,10 +20,10 @@ public class PlayerControls : MonoBehaviour {
 	public static int ammo = 10;
 
 	void Start () {
+		//gets character controller from tank and sends that to game manager script and gets original text color for ammo text
 		cc = gameObject.GetComponent<CharacterController> ();
 		GameManagerScript.player = this.gameObject; 
 		originalAmmoTextColor = ammoLeft.color;
-		//gets character controller from tank and sends that to game manager script and gets original text color for ammo text
 	}
 
 	void Update () {
@@ -49,10 +49,10 @@ public class PlayerControls : MonoBehaviour {
 		amountToRotate *= Time.deltaTime;
 		cc.Move (amountToMove);
 		transform.Rotate (amountToRotate);
-
-		ammoLeft.text = "Ammo: " + ammo; 
 		//updates the ammo to display how much the player has left
+		ammoLeft.text = "Ammo: " + ammo; 
 
+		//makes ammo flash red to alert the user that they're out of ammo
 		if (ammo == 0) {
 			ammoLeft.color = Color.red;
 			flashonoff = true;
@@ -61,41 +61,32 @@ public class PlayerControls : MonoBehaviour {
 			flashonoff = false;
 			ammoLeft.color = originalAmmoTextColor;
 		}
-		//makes ammo flash red to alert the user that they're out of ammo
-
+		//If the player has ammo and left clicks, then fire tank shell.
 		if (Input.GetMouseButtonDown (0) && ammo > 0) {
+			//Creates a new tank shell at the tank shell spawn location.
 			GameObject tankShellClone = (GameObject)GameObject.Instantiate (tankShell, tankShellSpawn.position, tankShellSpawn.rotation );
 			tankShellClone.GetComponent<Rigidbody> ().AddForce (tankShellSpawn.forward * shootSpeed); 
 			//After 60 seconds, destroy tank Shell.
 			Destroy (tankShellClone, 60f);
 			ammo-=1;
 		}
-		//uses mouse down to fire ammo from tank provided the player is not out of ammo
 	}
 
 	void OnTriggerEnter(Collider other) {
-
+		//if ammo cache is picked up, set it's active to false and add 10 ammo 
 		if (other.gameObject.tag == "Ammo") {
 			other.gameObject.SetActive (false);
 			ammo = ammo + 10;
 			Debug.Log ("GOT AMMO!"); 
 		} 
-		//if ammo cache is picked up, set it's active to false and add 10 ammo 
-
+		//if player (read: tank) is hit with a shell subtract one health
 		else if (other.gameObject.CompareTag ("Shell")) {
 			health -= 1;
 			Debug.Log (health);
 		}
-		//if player (read: tank) is hit with a shell subtract one health
-
-		if (other.name == "OutOfBoundsTrigger") {
-			GameLost ();
-		}
 		//if player drives off the edge of the player field redirect to lost game screen
+		if (other.name == "OutOfBoundsTrigger") {
+			GameManagerScript.GameLost ();
+		}
 	}
-
-	void GameLost () {
-		SceneManager.LoadScene ("GameLostScene");	
-	}
-	//function to redirect to lost game screen
 }
