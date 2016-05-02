@@ -20,18 +20,23 @@ public class GameManagerScript : MonoBehaviour {
 	void Start () {
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
+		//make mouse disappear for better player experience
 	}
 
 	// Update is called once per frame
 	void Update () {
 		turretsDestroyed.text = "Turrets Destroyed: " + scoreCountEnemy;
+		//displays how many turrets the player has destroyed
 		playerHealth.text = "Health: " + player.GetComponent<PlayerControls> ().health;
+		//displays player health
 		if (player.GetComponent<PlayerControls> ().health <= 0) {
 			GameLost ();
 		}
-		if (enemyCount == 5){
+		//if player health is less than or equal to sero, player loses so redirect to game lost scene
+		if (enemyCount == 7){
 			GameWon ();
 		}
+		//sets win condition
 	}
 
 	public static void ReduceEnemyCount (EnemyTurretScript turret) {

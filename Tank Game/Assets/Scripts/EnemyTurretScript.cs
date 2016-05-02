@@ -11,7 +11,6 @@ public class EnemyTurretScript : MonoBehaviour {
 	float shootSpeed = 3000.0f;
 	float timeToShoot;
 	float randShootNum;
-
 	public bool aimAtPlayer = false;
 
 	// Use this for initialization
@@ -22,7 +21,6 @@ public class EnemyTurretScript : MonoBehaviour {
 		//this will do anything.
 		turret = this.transform.Find ("Turret Appearance/Turret");
 		projectileSpawn = this.transform.Find ("Turret Appearance/Turret/ProjectileSpawn");
-		//timeToShoot = Time.deltaTime;
 	}
 	
 	// Update is called once per frame
